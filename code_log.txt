@@ -1,0 +1,2 @@
+2025-Jan-08-02:03:37 : Preliminaries complete. Initiating ETL process
+2025-Jan-08-02:03:37 : Data extraction complete. Initiating Transformation process
