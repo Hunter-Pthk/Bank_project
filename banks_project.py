@@ -49,7 +49,14 @@ def extract(url, table_attribs):
     df = pd.DataFrame(data, columns=table_attribs)
     return df
 
+def transform(df1):
+    file_path = 'exchange_rate.csv'
+    df = pd.read_csv(file_path)
+    exc_dict = dict(zip(df['Currency'],df['Rate']))
+    print(exc_dict)
+
 log_progress('Preliminaries complete. Initiating ETL process')
 df = extract(url, table_attribs)
 print(df)
 log_progress('Data extraction complete. Initiating Transformation process')
+transform(df)
