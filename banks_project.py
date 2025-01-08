@@ -5,16 +5,25 @@ from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
 import sqlite3
+import datetime
 
-url = 'https://web.archive.org/web/20230908091635 /https://en.wikipedia.org/wiki/List_of_largest_banks'
-table_attribs = ['Name','MC_USD_Billion']
-db = Banks.db
-table_name = Largest_banks
-csv_path = ./Largest_banks_data.csv
+url = 'https://web.archive.org/web/20230908091635/https://en.wikipedia.org/wiki/List_of_largest_banks'
+table_attribs = ["Name','MC_USD_Billion"]
+db = 'Banks.db'
+table_name = 'Largest_banks'
+csv_path = './Largest_banks_data.csv'
 
 def log_progress(message):
     ''' This function logs the mentioned message of a given stage of the
     code execution to a log file. Function returns nothing'''
+    timestamp_format = '%Y-%h-%d-%H:%M:%S' # Year-Monthname-Day-Hour-Minute-Second
+    now = datetime.now() # get current timestamp
+    timestamp = now.strftime(timestamp_format)
+    with open("./code_log.txt","a") as f:
+        f.write(timestamp + ' : ' + message + '\n') 
+    
+    log_progress('Preliminaries complete. Initiating ETL process')
+
 
 def extract(url, table_attribs):
     ''' This function aims to extract the required
