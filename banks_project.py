@@ -50,6 +50,10 @@ def extract(url, table_attribs):
     return df
 
 def transform(df1):
+    ''' This function accesses the CSV file for exchange rate
+    information, and adds three columns to the data frame, each
+    containing the transformed version of Market Cap column to
+    respective currencies'''
     file_path = 'exchange_rate.csv'
     df = pd.read_csv(file_path)
     exc_dict = dict(zip(df['Currency'],df['Rate']))
@@ -58,6 +62,11 @@ def transform(df1):
     df1['MC_INR_Billion'] = [ np.round((x * exc_dict['INR']),2)  for x in df1['MC_USD_Billion']]
     return df1
 
+def load_to_csv(df, output_path):
+    ''' This function saves the final data frame as a CSV file in
+    the provided path. Function returns nothing.'''
+    df.to_csv(output_path)
+
 log_progress('Preliminaries complete. Initiating ETL process')
 df = extract(url, table_attribs)
 # print(df)
@@ -65,3 +74,5 @@ log_progress('Data extraction complete. Initiating Transformation process')
 df2 = transform(df)
 print(df2)
 log_progress('Data transformation complete. Initiating Loading process')
+load_to_csv(df2, csv_path)
+log_progress('Data saved to CSV file')

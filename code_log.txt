@@ -1,3 +1,4 @@
-2025-Jan-08-19:06:21 : Preliminaries complete. Initiating ETL process
-2025-Jan-08-19:06:23 : Data extraction complete. Initiating Transformation process
-2025-Jan-08-19:06:23 : Data transformation complete. Initiating Loading process
+2025-Jan-08-19:54:07 : Preliminaries complete. Initiating ETL process
+2025-Jan-08-19:54:07 : Data extraction complete. Initiating Transformation process
+2025-Jan-08-19:54:07 : Data transformation complete. Initiating Loading process
+2025-Jan-08-19:54:07 : Data saved to CSV file
