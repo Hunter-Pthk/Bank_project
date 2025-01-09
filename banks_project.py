@@ -67,12 +67,26 @@ def load_to_csv(df, output_path):
     the provided path. Function returns nothing.'''
     df.to_csv(output_path)
 
+def load_to_db(df, sql_connection, table_name):
+    ''' This function saves the final data frame to a database
+    table with the provided name. Function returns nothing.'''
+    df.to_sql(table_name, sql_connection, if_exists='replace',index = False)
+
+
 log_progress('Preliminaries complete. Initiating ETL process')
 df = extract(url, table_attribs)
 # print(df)
 log_progress('Data extraction complete. Initiating Transformation process')
-df2 = transform(df)
-print(df2)
+
+df_t = transform(df)
+# print(df_t)
 log_progress('Data transformation complete. Initiating Loading process')
-load_to_csv(df2, csv_path)
+
+load_to_csv(df_t, csv_path)
 log_progress('Data saved to CSV file')
+
+sql_connection = sqlite3.connect('Banks.db')
+log_progress('SQL Connection initiated')
+
+load_to_db(df_t, sql_connection, table_name)
+log_progress('Data loaded to Database as a table, Executing queries')
