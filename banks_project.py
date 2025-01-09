@@ -53,10 +53,15 @@ def transform(df1):
     file_path = 'exchange_rate.csv'
     df = pd.read_csv(file_path)
     exc_dict = dict(zip(df['Currency'],df['Rate']))
-    print(exc_dict)
+    df1['MC_GBP_Billion'] = [ np.round((x * exc_dict['GBP']),2)  for x in df1['MC_USD_Billion']]
+    df1['MC_EUR_Billion'] = [ np.round((x * exc_dict['EUR']),2)  for x in df1['MC_USD_Billion']]
+    df1['MC_INR_Billion'] = [ np.round((x * exc_dict['INR']),2)  for x in df1['MC_USD_Billion']]
+    return df1
 
 log_progress('Preliminaries complete. Initiating ETL process')
 df = extract(url, table_attribs)
-print(df)
+# print(df)
 log_progress('Data extraction complete. Initiating Transformation process')
-transform(df)
+df2 = transform(df)
+print(df2)
+log_progress('Data transformation complete. Initiating Loading process')
